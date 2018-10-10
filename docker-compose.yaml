@@ -1,0 +1,28 @@
+version: "3.0"
+services:
+  db:
+    image: mysql
+    environment:
+      - MYSQL_DATABASE=webeer
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - /home/felipe/WeBeer/volume_mysql:/var/lib/mysql
+    container_name: mysql
+    networks:
+      - lupulonet
+  web-app:
+    build:
+      dockerfile: ./dockerfile
+      context: .
+    image: felipemota/tomcat
+    container_name: webeer
+    ports:
+      - "8080:8080"
+    networks:
+      - lupulonet
+    depends_on:
+      - "db"
+networks:
+  lupulonet:
+    driver: bridge
