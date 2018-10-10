@@ -1,0 +1,4 @@
+ubhiya/Model/Usuario.class
+ubhiya/Controller/ControleDeTransacao.class
+ubhiya/Controller/ControleDeSessao.class
+ubhiya/ConexaoMySQL.class
