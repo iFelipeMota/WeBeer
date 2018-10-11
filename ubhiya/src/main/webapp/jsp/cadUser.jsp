@@ -24,11 +24,11 @@
 		u.setLogin(request.getParameter("login"));
 		u.setSenha(request.getParameter("senha"));
 		u.cadastrar();
-		//response.sendRedirect(request.getRequestURI());
+		response.sendRedirect(request.getRequestURI());
 	}
 	if (request.getParameter("del") != null) {
 		u.deletar(Long.valueOf(request.getParameter("id")));
-		//response.sendRedirect(request.getRequestURI());
+		response.sendRedirect(request.getRequestURI());
 	}
 	if (request.getParameter("alt") != null) {
 		u = admns.get(Integer.parseInt(request.getParameter("i")) - 1);
@@ -38,7 +38,7 @@
 		u.setSenha(request.getParameter("senha"));
 		u.setId(Long.valueOf(request.getParameter("id")));
 		u.alterar();
-		//response.sendRedirect(request.getRequestURI());
+		response.sendRedirect(request.getRequestURI());
 	}
 %>
 
