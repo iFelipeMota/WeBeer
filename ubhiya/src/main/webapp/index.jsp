@@ -41,16 +41,24 @@
 
 				<div class="collapse navbar-collapse" id="collapse-navbar">
 					<ul class="nav navbar-nav">
-						<li><a href="<%=path%>/jsp/cadUser.jsp">Administradores</a></li>
-						<li><a href="comercios.html">Comércios</a></li>
+						<li><a href="<%=path%>/jsp/cadUser.jsp">Administrador</a></li>
+						<li><a href="<%=path%>/jsp/cadCliente.jsp">Consumidor</a></li>
+						<li><a href="<%=path%>/jsp/cadComercio.jsp">Comércio</a></li>
+						<li><a href="<%=path%>/jsp/cadFabricante.jsp">Fabricante</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 
 	</header>
-	<h2>Olá Mundo Cervejeiro!</h2>
+	<div class="container">
+		<h2>Olá Mundo Cervejeiro!</h2>
+		<p>Use os links ou a barra de navegação para acessar as telas de cadastros</p>
 
-	<a href="<%=path%>/jsp/cadUser.jsp">Usuários</a>
+		<a href="<%=path%>/jsp/cadUser.jsp">Usuários</a> || <a
+			href="<%=path%>/jsp/cadCliente.jsp">Consumidor</a> || <a
+			href="<%=path%>/jsp/cadComercio.jsp">Comércio</a> || <a
+			href="<%=path%>/jsp/cadFabricante.jsp">Fabricante</a>
+	</div>
 </body>
 </html>

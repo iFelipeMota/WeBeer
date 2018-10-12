@@ -22,6 +22,7 @@ public class Usuario {
 		senha = "";
 		tipoUser = null;
 	}
+
 	public Usuario(Long id, String login, String senha, Integer tipoUser) {
 		this.id = id;
 		this.login = login;
@@ -49,7 +50,47 @@ public class Usuario {
 			Usuario.status = "Problema na inclusão: "+e;
 		}
 	}
-	
+
+	public Long cadastrar(String login, String senha, Integer tipoUsuario) {
+		new ConexaoMySQL();
+		Connection con = ConexaoMySQL.conectar();
+		
+		Long idU=Long.valueOf(0);
+
+		try{
+			String sql = "insert into Usuario (login, senha, tipo_usuario) values (?,?,?)";
+
+			PreparedStatement stmt = con.prepareStatement(sql);		
+			stmt.setString(1, this.login);
+			stmt.setString(2, this.senha);
+			stmt.setInt(3, this.tipoUser);
+			stmt.execute();
+			stmt.close();
+			
+			Usuario.status = "Usuário "+login+" inserido com sucesso";
+
+			sql = "select max(id_usuario) from Usuario";
+
+			PreparedStatement stmt2 = con.prepareStatement(sql);
+			ResultSet rs = stmt2.executeQuery();
+			
+			while(rs.next()) {
+				idU  = rs.getLong(1);
+			}
+			
+			
+			rs.close();
+			stmt2.close();
+
+			con.close();
+		}catch(Exception e) {
+			System.out.println("Inclusão não realizada: "+e);
+			Usuario.status = "Problema na inclusão: "+e;
+		}
+
+		return idU;
+	}
+
 	public void deletar(Long id) {
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();
@@ -68,7 +109,7 @@ public class Usuario {
 			Usuario.status = "Problema na exclusão: "+e;
 		}
 	}
-	
+
 	public void alterar() {
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();
@@ -89,10 +130,10 @@ public class Usuario {
 			Usuario.status = "Problema na alteração: "+e;
 		}
 	}
-	
+
 	public List<Usuario> buscarAdm() {
 		Connection con = ConexaoMySQL.conectar();
-		String sql = "select * from Usuario";
+		String sql = "select * from Usuario where tipo_usuario=1";
 
 		List<Usuario> admns = new ArrayList<Usuario>(); 
 		try {
@@ -110,6 +151,7 @@ public class Usuario {
 		return admns;		
 	}
 	
+
 	public Long getId() {
 		return id;
 	}

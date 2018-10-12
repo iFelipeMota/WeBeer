@@ -24,11 +24,11 @@
 		u.setLogin(request.getParameter("login"));
 		u.setSenha(request.getParameter("senha"));
 		u.cadastrar();
-		//response.sendRedirect(request.getRequestURI());
+		response.sendRedirect(request.getRequestURI());
 	}
 	if (request.getParameter("del") != null) {
 		u.deletar(Long.valueOf(request.getParameter("id")));
-		//response.sendRedirect(request.getRequestURI());
+		response.sendRedirect(request.getRequestURI());
 	}
 	if (request.getParameter("alt") != null) {
 		u = admns.get(Integer.parseInt(request.getParameter("i")) - 1);
@@ -38,7 +38,7 @@
 		u.setSenha(request.getParameter("senha"));
 		u.setId(Long.valueOf(request.getParameter("id")));
 		u.alterar();
-		//response.sendRedirect(request.getRequestURI());
+		response.sendRedirect(request.getRequestURI());
 	}
 %>
 
@@ -84,27 +84,15 @@
 
 				<div class="collapse navbar-collapse" id="collapse-navbar">
 					<ul class="nav navbar-nav">
-						<li><a href="<%=path%>/jsp/cadUser.jsp">Administradores</a></li>
-						<li><a href="comercios.html">Comércios</a></li>
-						<li><a href="comercios.html">Cervejaria</a></li>
+						<li><a href="<%=path%>/jsp/cadUser.jsp">Administrador</a></li>
+						<li><a href="<%=path%>/jsp/cadCliente.jsp">Consumidor</a></li>
+						<li><a href="<%=path%>/jsp/cadComercio.jsp">Comércio</a></li>
+						<li><a href="<%=path%>/jsp/cadFabricante.jsp">Fabricante</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
-	<%
-		if (u.getStatus() != null) {
-	%>
-	<div class="container">
-		<br />
-		<div class="alert alert-success">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-			<%=u.getStatus()%>
-		</div>
-	</div>
-	<%
-		}
-	%>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 container">

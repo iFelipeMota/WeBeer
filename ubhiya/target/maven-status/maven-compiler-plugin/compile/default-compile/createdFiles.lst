@@ -1,4 +1,7 @@
-ubhiya/Model/Usuario.class
 ubhiya/Controller/ControleDeTransacao.class
-ubhiya/Controller/ControleDeSessao.class
+ubhiya/Model/Fabricante.class
 ubhiya/ConexaoMySQL.class
+ubhiya/Model/Comercio.class
+ubhiya/Model/Usuario.class
+ubhiya/Model/Cliente.class
+ubhiya/Controller/ControleDeSessao.class
