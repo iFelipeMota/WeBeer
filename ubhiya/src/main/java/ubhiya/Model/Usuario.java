@@ -30,6 +30,25 @@ public class Usuario {
 		this.tipoUser = tipoUser;
 	}
 
+	public static Usuario logar(String login, String senha) throws SQLException {
+		new ConexaoMySQL();
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select * from Usuario where login=? and senha=?";
+		
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, login);
+			stmt.setString(2, senha);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			Usuario u  = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getInt(4));			
+			
+			rs.close();
+			stmt.close();
+			con.close();
+			
+			return u;
+	}
+	
 	public void cadastrar() {
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();

@@ -16,9 +16,9 @@ public class ConexaoMySQL {
 			
 			String server = "localhost";
 			String banco = "webeerDev";
-			String url = /*"jdbc:mysql://localhost:3306/webeerDev";*/"jdbc:mysql://db:3306/webeer";
-			String user = "root";
-			String pass = null;
+			String url = "jdbc:mysql://localhost:3306/webeerDev";//"jdbc:mysql://db:3306/webeer";
+			String user = "webeer"; //"root";
+			String pass = "webeer";  //null;
 			
 			con = DriverManager.getConnection(url, user, pass);
 			
