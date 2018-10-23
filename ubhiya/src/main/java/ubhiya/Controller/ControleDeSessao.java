@@ -25,6 +25,7 @@ public class ControleDeSessao extends HttpServlet {
 			//String n=(String)session.getAttribute("uname");
 			String n;
 			String s;
+			session.setAttribute("status", null);
 
 			if (request.getParameter("login") != null){
 				request.getSession(true);
@@ -42,10 +43,12 @@ public class ControleDeSessao extends HttpServlet {
 				u = Usuario.logar(n, s);
 				session.setAttribute("id", u.getId());
 				session.setAttribute("tipo", u.getTipoUser());
+				System.out.println("id: "+session.getAttribute("id"));
 
 				System.out.println(session.getId());
 
-				if(session.getAttribute("id").equals("")) {
+				if(session.getAttribute("id")==null) {
+					session.setAttribute("status", "Login não realizado. Usuário ou senha inválidos");
 					response.sendRedirect("index.jsp");
 				}else {
 					response.sendRedirect("jsp/cadUser.jsp");                	
@@ -62,7 +65,7 @@ public class ControleDeSessao extends HttpServlet {
                 System.out.println(session.getId());
                 response.sendRedirect("home.jsp");
             }*/
-			else if(request.getParameter("logout") != null || request.getParameter("userNAme").equals(null)){
+			else if(request.getParameter("logout") != null /*|| request.getParameter("userNAme").equals(null)*/){
 				System.out.println("Logout");
 				session.invalidate();
 				response.sendRedirect("index.jsp");

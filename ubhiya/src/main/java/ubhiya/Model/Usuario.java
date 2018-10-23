@@ -39,8 +39,10 @@ public class Usuario {
 			stmt.setString(1, login);
 			stmt.setString(2, senha);
 			ResultSet rs = stmt.executeQuery();
-			rs.next();
-			Usuario u  = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getInt(4));			
+			Usuario u = new Usuario();
+			if(rs.next()) {
+			u  = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getInt(4));			
+			}
 			
 			rs.close();
 			stmt.close();

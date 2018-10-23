@@ -30,8 +30,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-	
-	<link rel="stylesheet" type="text/css" href="<%=path%>/jsp/estilos.css">
+
+<link rel="stylesheet" type="text/css" href="<%=path%>/jsp/estilos.css">
 </head>
 <body>
 	<header>
@@ -60,8 +60,8 @@
 				<form action="ControleDeSessao">
 					<div class="form-group">
 						<label for="log-user">Login:</label> <input id="log-user"
-							type="text" name="userName" placeholder="Login" class="form-control"
-							value="<%=login%>">
+							type="text" name="userName" placeholder="Login"
+							class="form-control" value="<%=login%>">
 					</div>
 
 					<div class="form-group">
@@ -69,8 +69,14 @@
 							type="password" name="senha" placeholder="Sua Senha"
 							class="form-control" value="<%=senha%>">
 					</div>
-
-					<button type="submit" name=login class="btn btn-primary btn-lg login-button" value="entrar">Logar</button>
+					
+					<%if(session.getAttribute("status")!=null){ %>
+					<div class="alert alert-warning" role="alert">
+						<%=session.getAttribute("status") %>
+					</div>
+					<%} %>
+					<button type="submit" name=login
+						class="btn btn-primary btn-lg login-button" value="entrar">Logar</button>
 				</form>
 			</div>
 		</div>
