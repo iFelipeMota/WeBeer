@@ -11,7 +11,7 @@ import ubhiya.ConexaoMySQL;
 
 public class Fabricante  extends Usuario{
 
-	private Long idComercio;
+	private Long idFabricante;
 	private String nomeFantasia;
 	private String razaoSocial;
 	private String cnpj;
@@ -21,19 +21,19 @@ public class Fabricante  extends Usuario{
 	public Fabricante() {
 	}
 
-	public Fabricante(Usuario u, Long idComercio, String razaoSocial, String cnpj, String ie, String nomeFantasia) {
+	public Fabricante(Usuario u, Long idFabricante, String razaoSocial, String cnpj, String ie, String nomeFantasia) {
 		this.setId(u.getId());
 		this.setLogin(u.getLogin());
 		this.setSenha(u.getSenha());
-		this.idComercio = idComercio;
+		this.idFabricante = idFabricante;
 		this.nomeFantasia = nomeFantasia;
 		this.razaoSocial = razaoSocial;
 		this.cnpj = cnpj;
 		this.ie = ie;
 	}
 
-	public void cadastrarComercio() {
-		Long idC = this.cadastrar(this.getLogin(), this.getSenha(), 3);
+	public void cadastrarFabricante() {
+		Long idC = this.cadastrar(this.getLogin(), this.getSenha(), 4);
 
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();
@@ -58,7 +58,7 @@ public class Fabricante  extends Usuario{
 		}
 	}
 
-	public void deletarComercio(Long id) {
+	public void deletarFabricante(Long id) {
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();
 		String sql = "delete from Fabricante where Usuario_id_usuario = ?";
@@ -77,7 +77,7 @@ public class Fabricante  extends Usuario{
 		}
 	}
 
-	public void alterarComercio() {
+	public void alterarFabricante() {
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();
 
@@ -102,33 +102,49 @@ public class Fabricante  extends Usuario{
 		}
 	}
 
-	public List<Fabricante> buscarComercios() {
+	public List<Fabricante> buscarFabricantes() {
 		Connection con = ConexaoMySQL.conectar();
 		String sql = "select a.id_usuario, a.login, a.senha, b.id_fabricante, b.razao_social, b.CNPJ, b.IE, b.nome_fantasia from Usuario as a, Fabricante as b where b.Usuario_id_usuario = a.id_usuario";
 
-		List<Fabricante> comercios = new ArrayList<Fabricante>(); 
+		List<Fabricante> fabricantes = new ArrayList<Fabricante>(); 
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				Usuario u = new Usuario(rs.getLong("id_usuario"), rs.getString("login"), rs.getString("senha"), 3);
+				Usuario u = new Usuario(rs.getLong("id_usuario"), rs.getString("login"), rs.getString("senha"), 4);
 				Fabricante c = new Fabricante(u, rs.getLong("id_fabricante"), rs.getString("razao_social"), rs.getString("CNPJ"), rs.getString("IE"), rs.getString("nome_fantasia"));
-				comercios.add(c);
+				fabricantes.add(c);
 			}
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
 			this.status = "Problema na Pesquisa: "+e;
 		}
-		return comercios;		
+		return fabricantes;		
 	}
 
-	public Long getIdComercio() {
-		return idComercio;
+	//Método para verificar se já existe fabricante cadastrado com o cnpj informado
+	public static boolean existeCnpj(String cnpj) throws SQLException {
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select * from Fabricante where cnpj = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1, cnpj);
+		ResultSet rs = stmt.executeQuery();
+		boolean ret = false;
+		if (rs.next()) {
+			ret = true;
+		}
+		rs.close();
+		stmt.close();
+		return ret;
+	}
+	
+	public Long getIdFabricante() {
+		return idFabricante;
 	}
 
-	public void setIdComercio(Long idComercio) {
-		this.idComercio = idComercio;
+	public void setIdFabricante(Long idFabricante) {
+		this.idFabricante = idFabricante;
 	}
 
 	public String getNomeFantasia() {

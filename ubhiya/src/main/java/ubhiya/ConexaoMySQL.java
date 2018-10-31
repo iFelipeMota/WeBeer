@@ -16,7 +16,7 @@ public class ConexaoMySQL {
 			
 			String server = "localhost";
 			String banco = "webeerDev";
-			String url = "jdbc:mysql://localhost:3306/webeerDev";//"jdbc:mysql://db:3306/webeer";
+			String url = "jdbc:mysql://localhost:3306/webeer?useTimezone=true&serverTimezone=UTC";//"jdbc:mysql://db:3306/webeer";
 			String user = "webeer"; //"root";
 			String pass = "webeer";  //null;
 			

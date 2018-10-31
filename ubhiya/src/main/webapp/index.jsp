@@ -78,6 +78,14 @@
 					<button type="submit" name=login
 						class="btn btn-primary btn-lg login-button" value="entrar">Logar</button>
 				</form>
+				
+				<a href="jsp/cadastroCliente.jsp"
+						class="btn btn-primary btn-lg">Cadastro Cliente</a>
+				<a href="jsp/cadastroComercio.jsp"
+						class="btn btn-primary btn-lg">Cadastro Comércio</a>
+				<a href="jsp/cadastroFabricante.jsp"
+						class="btn btn-primary btn-lg">Cadastro Fabricante</a>		
+				
 			</div>
 		</div>
 	</div>
