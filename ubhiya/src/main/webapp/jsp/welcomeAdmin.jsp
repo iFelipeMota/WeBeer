@@ -1,8 +1,10 @@
+<%@page import="ubhiya.Model.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%
-	//TODO Pegar id do fabricante por session
+	Usuario u = (Usuario)request.getSession().getAttribute("usuario");
+	String nome = u.getLogin();
 %>
 <html>
 <head>
@@ -29,11 +31,13 @@
 </head>
 <body>
 	<div class="jumbotron">
-  		<h1>Bem vindo, Fabricante</h1>
-  		<p>Cadastre aqui suas cervejas</p>
+  		<h1>Bem vindo, <%=nome %></h1>
+  		<p>Manutenção de admins, clientes, comércios e fabricantes</p>
   		<p>
-  			<a class="btn btn-primary btn-lg" href="cadastroCerveja.jsp" role="button">Cadastrar cerveja</a>
-  			<a class="btn btn-primary btn-lg" href="#" role="button">Listar cervejas</a>
+  			<a class="btn btn-primary btn-lg" href="cadCliente.jsp" role="button">Clientes</a>
+  			<a class="btn btn-primary btn-lg" href="cadComercio.jsp" role="button">Comércios</a>
+  			<a class="btn btn-primary btn-lg" href="cadFabricante.jsp" role="button">Fabricantes</a>
+  			<a class="btn btn-primary btn-lg" href="cadUser.jsp" role="button">Admins</a>
   		</p>
 	</div>
 </body>

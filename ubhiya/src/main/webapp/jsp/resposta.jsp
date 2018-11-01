@@ -1,3 +1,5 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="ubhiya.Model.Cerveja"%>
 <%@page import="ubhiya.Model.Usuario"%>
 <%@page import="ubhiya.Model.Fabricante"%>
 <%@page import="ubhiya.Model.Comercio"%>
@@ -10,8 +12,9 @@
 <%
 	String path = request.getContextPath();
 
+	String destino = "../index.jsp";
 	boolean error = false;
-	boolean success = false;
+	//boolean success = false;
 		
 	String mensagem = null;
 
@@ -34,6 +37,7 @@
 		if (Usuario.existeLogin(c.getLogin())){
 			error = true;
 			mensagem = "Erro: Login já cadastrado!";
+			destino = "cadastroCliente.jsp";
 		}
 		
 		if (!error){
@@ -58,6 +62,7 @@
 		if (Usuario.existeLogin(co.getLogin())){
 			error = true;
 			mensagem = "Erro: Login já cadastrado!";
+			destino = "cadastroComercio.jsp";
 		} else if (Comercio.existeCnpj(co.getCnpj())){
 			error = true;
 			mensagem = "Erro: Já existe uma empresa cadastrada com o cnpj informado!";
@@ -89,23 +94,10 @@
 		f.setIe(request.getParameter("ie"));
 		f.setNomeFantasia(request.getParameter("nomeF"));
 		
-		/*List<Fabricante> fabricantes = f.buscarFabricantes();
-		
-		for (Fabricante fabricante: fabricantes){
-			if (fabricante.getLogin().equals(f.getLogin())){
-				error = true;
-				mensagem = "Erro: Login já cadastrado!";
-				break;
-			} else if (fabricante.getCnpj().equals(f.getCnpj())){
-				error = true;
-				mensagem = "Erro: Já existe uma empresa cadastrada com o cnpj informado!";
-				break;
-			}
-		}*/
-		
 		if (Usuario.existeLogin(f.getLogin())){
 			error = true;
 			mensagem = "Erro: Login já cadastrado!";
+			destino = "cadastroFabricante.jsp";
 		} else if (Fabricante.existeCnpj(f.getCnpj())){
 			error = true;
 			mensagem = "Erro: Já existe uma empresa cadastrada com o cnpj informado!";
@@ -115,13 +107,60 @@
 			f.cadastrarFabricante();
 			mensagem = "Cadastro efetuado com sucesso!";
 		}
+	} else if (request.getParameter("cadastrarCerveja") != null) {
+		Cerveja cerva = new Cerveja();
+		cerva.setIdFabricante(0l); //cerva.setIdFabricante((Long)request.getSession().getAttribute("fabricante.id"));
+		cerva.setNomeCerveja(request.getParameter("nomeCerveja"));
+		cerva.setTipoCerveja(request.getParameter("tipoCerveja"));
+		cerva.setDescricaoCerveja(request.getParameter("descricaoCerveja"));
+		cerva.setIbu(Long.valueOf(request.getParameter("ibu")));
+		cerva.setAbv(Double.valueOf(request.getParameter("abv")));
+		
+		try{
+			cerva.cadastrarCerveja();
+			mensagem = "Cerveja cadastrada com sucesso!";
+		} catch (SQLException e){
+			error = true;
+			mensagem = "Erro ao cadastrar cerveja: " + e.getMessage();
+		}
+	} else if (request.getParameter("login") != null) {
+		Usuario u = Usuario.logar(request.getParameter("userName"), request.getParameter("senha"));
+		
+		if (u.getId() != null){
+			switch (u.getTipoUser()){
+			case 1:
+				destino = "welcomeAdmin.jsp";
+				mensagem = "Login efetuado com sucesso!";
+				request.getSession().setAttribute("usuario", u);
+				break;
+			case 2:
+				try{
+				Cliente cliente = Cliente.obterCliente(u.getId());
+				destino = "welcomeCliente.jsp";
+				mensagem = "Login efetuado com sucesso!";
+				
+				request.getSession().setAttribute("cliente", cliente);
+				} catch (SQLException e){
+					error = true;
+					mensagem = "Erro: " + e.getMessage();
+					destino = "../index.jsp";
+				}
+				break;
+			case 3:
+				//TODO Implementar login de comércio
+				break;
+			case 4:
+				//TODO Implementar login de fabricante
+				break;
+			}
+		}
 	}
 
 	%>
 
 <html>
 <head>
-<meta charset="ISO-8859-1" http-equiv="refresh" content="3; url=../index.jsp">
+<meta charset="ISO-8859-1" http-equiv="refresh" content="3; url=<%=destino%>">
 <title>Webeer</title>
 
 <!-- Latest compiled and minified CSS -->
@@ -145,7 +184,8 @@
 </head>
 <body>
 <h2 class='<%=error?"text-danger":"text-success"%>'><%=mensagem %></h2>
-<a href="../index.jsp"
-						class="btn btn-primary btn-lg">Home</a>
+<h4>Redirecionando...</h4>
+<!--a href="../index.jsp"
+						class="btn btn-primary btn-lg">Home</a-->
 </body>
 </html>

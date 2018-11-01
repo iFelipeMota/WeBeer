@@ -1,8 +1,10 @@
+<%@page import="ubhiya.Model.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%
-	//TODO Pegar id do fabricante por session
+	Cliente cliente = (Cliente)request.getSession().getAttribute("cliente");
+	String nome = cliente.getNome();
 %>
 <html>
 <head>
@@ -29,10 +31,10 @@
 </head>
 <body>
 	<div class="jumbotron">
-  		<h1>Bem vindo, Fabricante</h1>
-  		<p>Cadastre aqui suas cervejas</p>
+  		<h1>Bem vindo, <%=nome %></h1>
+  		<p>Encontre novas cervejas, avalie as que você já provou, e saiba onde sua cerveja favorita pode ser encontrada</p>
   		<p>
-  			<a class="btn btn-primary btn-lg" href="cadastroCerveja.jsp" role="button">Cadastrar cerveja</a>
+  			<a class="btn btn-primary btn-lg" href="#" role="button">Procurar estabelecimentos</a>
   			<a class="btn btn-primary btn-lg" href="#" role="button">Listar cervejas</a>
   		</p>
 	</div>

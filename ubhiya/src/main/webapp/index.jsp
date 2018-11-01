@@ -57,7 +57,8 @@
 
 		<div class="col-md-4">
 			<div class="login-banner container">
-				<form action="ControleDeSessao">
+				<!--form action="ControleDeSessao"-->
+				<form action="jsp/resposta.jsp" method="post">
 					<div class="form-group">
 						<label for="log-user">Login:</label> <input id="log-user"
 							type="text" name="userName" placeholder="Login"

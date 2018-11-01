@@ -52,43 +52,37 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6 container">
 				<form action="resposta.jsp" method="post">
-					<!-- div class="form-group">
-						<label for="log-user">Login:</label> <input id="log-user"
-							type="text" name="login" placeholder="Login" class="form-control"
+					<div class="form-group">
+						<label for="nomeCerveja">Nome:</label> <input id="nomeCerveja"
+							type="text" name="nomeCerveja" placeholder="Nome da cerveja" class="form-control"
 							required>
 					</div>
 
 					<div class="form-group">
-						<label for="log-senha">Senha:</label> <input id="log-senha"
-							type="password" name="senha" placeholder="Sua Senha"
+						<label for="tipoCerveja">Tipo:</label> <input id="tipoCerveja"
+							type="text" name="tipoCerveja" placeholder="Ex.: IPA, Pilsen, Weiss..."
 							class="form-control" required>
 					</div>
 
 					<div class="form-group">
-						<label for="log-nomef">Nome Fantasia:</label> <input
-							id="log-nomef" type="text" name="nomeF"
-							placeholder="Nome Fantasia" class="form-control"
+						<label for="descricaoCerveja">Descrição:</label> <input
+							id="descricaoCerveja" type="text" name="descricaoCerveja"
+							placeholder="Descreva detalhes de sua cerveja (sabor, aroma, cor etc)" class="form-control"
 							required>
 					</div>
 
 					<div class="form-group">
-						<label for="log-rs">Razão Social:</label> <input id="log-rs"
-							type="text" name="razaoS" placeholder="Razão Social"
+						<label for="ibu">IBU:</label> <input id="ibu"
+							type="number" name="ibu" min="0" step="1"
 							class="form-control" required>
 					</div>
 
 					<div class="form-group">
-						<label for="log-cnpj">CNPJ:</label> <input id="log-cnpj"
-							type="text" name="cnpj" placeholder="CNPJ" class="form-control"
-							required>
+						<label for="abv">ABV (%):</label> <input id="abv"
+							type="number" name="abv" class="form-control"
+							min="0" step="0.1" required>
 					</div>
 
-					<div class="form-group">
-						<label for="log-ie">IE:</label> <input id="log-ie" type="text"
-							name="ie" placeholder="IE" class="form-control"
-							required>
-					</div-->
-					
 					<button type="submit" name="cadastrarCerveja"
 						class="btn btn-primary btn-lg login-button">Salvar</button>
 					

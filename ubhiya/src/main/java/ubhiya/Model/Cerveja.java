@@ -21,7 +21,7 @@ public class Cerveja {
 	
 	public Cerveja() {}
 	
-	public void cadastrarFabricante() throws SQLException{
+	public void cadastrarCerveja() throws SQLException{
 
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();
