@@ -14,7 +14,8 @@ public class Cerveja {
 	private Long idCerveja;
 	private Long idFabricante;
 	private String nomeCerveja;
-	private String tipoCerveja;
+	//TODO Definir como será o tipo de cerveja (string ou fk de uma nova tabela de tipos)
+	private Long tipoCerveja;//private String tipoCerveja;
 	private String descricaoCerveja;
 	private Long ibu;
 	private double abv;
@@ -26,12 +27,12 @@ public class Cerveja {
 		new ConexaoMySQL();
 		Connection con = ConexaoMySQL.conectar();
 
-		String sql = "insert into Cerveja (id_fabricante, nome_cerveja, tipo_cerveja, descricao_cerveja, ibu, abv) values (?,?,?,?,?,?)";
+		String sql = "insert into Cerveja (Fabricante_id_fabricante, nome_cerveja, tipo_cerveja, descricao_cerveja, ibu, abv) values (?,?,?,?,?,?)";
 
 		PreparedStatement stmt = con.prepareStatement(sql);	
 		stmt.setLong(1, this.idFabricante);
 		stmt.setString(2, this.nomeCerveja);
-		stmt.setString(3, this.tipoCerveja);
+		stmt.setLong(3, this.tipoCerveja);//stmt.setString(3, this.tipoCerveja);
 		stmt.setString(4, this.descricaoCerveja);
 		stmt.setLong(5, this.ibu);
 		stmt.setDouble(6, this.abv);
@@ -64,7 +65,7 @@ public class Cerveja {
 
 		PreparedStatement stmt = con.prepareStatement(sql);		
 		stmt.setString(1, this.nomeCerveja);
-		stmt.setString(2, this.tipoCerveja);
+		stmt.setLong(2, this.tipoCerveja);//stmt.setString(2, this.tipoCerveja);
 		stmt.setString(3, this.descricaoCerveja);
 		stmt.setLong(4, this.ibu);
 		stmt.setDouble(5, this.abv);
@@ -95,10 +96,10 @@ public class Cerveja {
 	public void setNomeCerveja(String nomeCerveja) {
 		this.nomeCerveja = nomeCerveja;
 	}
-	public String getTipoCerveja() {
+	public Long getTipoCerveja() {
 		return tipoCerveja;
 	}
-	public void setTipoCerveja(String tipoCerveja) {
+	public void setTipoCerveja(Long tipoCerveja) {
 		this.tipoCerveja = tipoCerveja;
 	}
 	public String getDescricaoCerveja() {

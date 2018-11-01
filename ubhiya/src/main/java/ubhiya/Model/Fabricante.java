@@ -122,6 +122,25 @@ public class Fabricante  extends Usuario{
 		}
 		return fabricantes;		
 	}
+	
+	public static Fabricante obterFabricante(Long idUsuario) throws SQLException{
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select a.id_usuario, a.login, a.senha, b.id_fabricante, b.nome_fantasia, b.razao_social, b.cnpj, b.ie from Usuario as a, Fabricante as b where b.Usuario_id_usuario = a.id_usuario and b.Usuario_id_usuario = ?";
+		Fabricante fabricante = null;
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setLong(1, idUsuario);
+		ResultSet rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			fabricante = new Fabricante(new Usuario(idUsuario, rs.getString(2), null, 4), rs.getLong(4), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(5));
+		}
+		rs.close();
+		stmt.close();
+		con.close();
+		
+		return fabricante;
+	}
 
 	//Método para verificar se já existe fabricante cadastrado com o cnpj informado
 	public static boolean existeCnpj(String cnpj) throws SQLException {

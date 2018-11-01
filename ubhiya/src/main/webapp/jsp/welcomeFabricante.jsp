@@ -1,8 +1,9 @@
+<%@page import="ubhiya.Model.Fabricante"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%
-	//TODO Pegar id do fabricante por session
+	Fabricante fabricante = (Fabricante)request.getSession().getAttribute("fabricante");
 %>
 <html>
 <head>
@@ -29,7 +30,7 @@
 </head>
 <body>
 	<div class="jumbotron">
-  		<h1>Bem vindo, Fabricante</h1>
+  		<h1>Bem vindo, <%=fabricante.getNomeFantasia() %></h1>
   		<p>Cadastre aqui suas cervejas</p>
   		<p>
   			<a class="btn btn-primary btn-lg" href="cadastroCerveja.jsp" role="button">Cadastrar cerveja</a>

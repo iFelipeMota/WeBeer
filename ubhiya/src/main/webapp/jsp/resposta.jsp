@@ -109,9 +109,10 @@
 		}
 	} else if (request.getParameter("cadastrarCerveja") != null) {
 		Cerveja cerva = new Cerveja();
-		cerva.setIdFabricante(0l); //cerva.setIdFabricante((Long)request.getSession().getAttribute("fabricante.id"));
+		Fabricante f = (Fabricante)request.getSession().getAttribute("fabricante");
+		cerva.setIdFabricante(f.getIdFabricante());
 		cerva.setNomeCerveja(request.getParameter("nomeCerveja"));
-		cerva.setTipoCerveja(request.getParameter("tipoCerveja"));
+		cerva.setTipoCerveja(Long.valueOf(request.getParameter("tipoCerveja")));
 		cerva.setDescricaoCerveja(request.getParameter("descricaoCerveja"));
 		cerva.setIbu(Long.valueOf(request.getParameter("ibu")));
 		cerva.setAbv(Double.valueOf(request.getParameter("abv")));
@@ -150,7 +151,17 @@
 				//TODO Implementar login de comércio
 				break;
 			case 4:
-				//TODO Implementar login de fabricante
+				try{
+					Fabricante fabricante = Fabricante.obterFabricante(u.getId());
+					destino = "welcomeFabricante.jsp";
+					mensagem = "Login efetuado com sucesso!";
+					
+					request.getSession().setAttribute("fabricante", fabricante);
+					} catch (SQLException e){
+						error = true;
+						mensagem = "Erro: " + e.getMessage();
+						destino = "../index.jsp";
+					}
 				break;
 			}
 		}

@@ -58,9 +58,14 @@
 							required>
 					</div>
 
-					<div class="form-group">
+					<!--div class="form-group">
 						<label for="tipoCerveja">Tipo:</label> <input id="tipoCerveja"
 							type="text" name="tipoCerveja" placeholder="Ex.: IPA, Pilsen, Weiss..."
+							class="form-control" required>
+					</div-->
+					<div class="form-group">
+						<label for="tipoCerveja">Tipo:</label> <input id="tipoCerveja"
+							type="number" name="tipoCerveja" placeholder="Número (trocar campo para list com os tipos de cerveja)"
 							class="form-control" required>
 					</div>
 
