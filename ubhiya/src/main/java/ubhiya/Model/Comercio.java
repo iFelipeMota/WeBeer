@@ -126,7 +126,7 @@ public class Comercio extends Usuario{
 	//Método para verificar se já existe comércio cadastrado com o cnpj informado
 	public static boolean existeCnpj(String cnpj) throws SQLException {
 		Connection con = ConexaoMySQL.conectar();
-		String sql = "select * from Comercio where cnpj = ?";
+		String sql = "select * from Estabelecimento where cnpj = ?";
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setString(1, cnpj);
 		ResultSet rs = stmt.executeQuery();
@@ -137,6 +137,25 @@ public class Comercio extends Usuario{
 		rs.close();
 		stmt.close();
 		return ret;
+	}
+	
+	public static Comercio obterComercio(Long idUsuario) throws SQLException{
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select a.id_usuario, a.login, a.senha, b.id_estabelecimento, b.nome_fantasia, b.razao_social, b.cnpj, b.ie from Usuario as a, Estabelecimento as b where b.Usuario_id_usuario = a.id_usuario and b.Usuario_id_usuario = ?";
+		Comercio comercio = null;
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setLong(1, idUsuario);
+		ResultSet rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			comercio = new Comercio(new Usuario(idUsuario, rs.getString(2), null, 3), rs.getLong(4), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(5));
+		}
+		rs.close();
+		stmt.close();
+		con.close();
+		
+		return comercio;
 	}
 
 	public Long getIdComercio() {

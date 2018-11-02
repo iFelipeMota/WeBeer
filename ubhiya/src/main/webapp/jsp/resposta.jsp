@@ -148,7 +148,17 @@
 				}
 				break;
 			case 3:
-				//TODO Implementar login de comércio
+				try{
+					Comercio comercio = Comercio.obterComercio(u.getId());
+					destino = "welcomeComercio.jsp";
+					mensagem = "Login efetuado com sucesso!";
+					
+					request.getSession().setAttribute("comercio", comercio);
+					} catch (SQLException e){
+						error = true;
+						mensagem = "Erro: " + e.getMessage();
+						destino = "../index.jsp";
+					}
 				break;
 			case 4:
 				try{
