@@ -11,6 +11,11 @@
 <!DOCTYPE html>
 <%
 	int pagina = 1;
+
+	if (request.getParameter("pagina") != null){
+		pagina = Integer.parseInt(request.getParameter("pagina"));
+	}
+
 	Long totalPaginas = 0l;
 	ListaPaginada<CervejaDto> cervejas = null;
 	
@@ -51,6 +56,7 @@
 	<div class="jumbotron">
   		<h1>Lista de cervejas</h1>
 	</div>
+		<form name="form" action="detalhesCerveja.jsp" method="post">
 		<table class="table table-striped">
 	  		<thead>
 	    		<tr>
@@ -62,9 +68,10 @@
 			    </tr>
 	  		</thead>
 	  		<tbody>
+	  		
 	  		<%for(int i=0; i<cervejas.getLista().size(); i++){ %>
-			    <tr>
-			      <th scope="row"><%=i+1%></th>
+			    <tr onclick="form.submit()">
+			      <th scope="row"><%=i+1%><input type="hidden" name="idCerveja" value="<%=cervejas.getLista().get(i).getIdCerveja() %>"></th>
 			      <td><%=cervejas.getLista().get(i).getFabricante() %></td>
 			      <td><%=cervejas.getLista().get(i).getNomeCerveja() %></td>
 			      <td><%=cervejas.getLista().get(i).getIbu() %></td>
@@ -72,14 +79,18 @@
 			      
 			    </tr>
 		    <%}%>
+		    
 		  </tbody>
 		</table>
+		</form>
 		<nav aria-label="Page navigation example">
+  <form method="post">
   <ul class="pagination">
   <%for(Long i=1l; i<=totalPaginas; i++){ %>
-    <li class="page-item"><input type="submit" value="<%=i%>"><input type="hidden" value="pagina"></li>
+    <li class="page-item"><input type="submit" name="pagina" value="<%=i%>" <%=pagina==i?"disabled":""%> ></li>
   <%}%>
   </ul>
+  </form>
 </nav>
 </body>
 </html>

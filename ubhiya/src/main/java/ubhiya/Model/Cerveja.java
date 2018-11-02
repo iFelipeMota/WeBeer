@@ -81,7 +81,7 @@ public class Cerveja {
 
 	public static ListaPaginada<CervejaDto> buscarCervejas(int pagina) throws SQLException {
 		Connection con = ConexaoMySQL.conectar();
-		String sql = "select f.nome_fantasia, c.id_cerveja, c.nome_cerveja, c.ibu, c.abv from Cerveja c "
+		String sql = "select f.nome_fantasia, c.id_cerveja, c.nome_cerveja, c.descricao_cerveja, c.ibu, c.abv from Cerveja c "
 				+ "inner join Fabricante f on f.id_fabricante = c.Fabricante_id_fabricante "
 				+ "limit " + (pagina-1)*10 + ",10"; 
 
@@ -91,7 +91,7 @@ public class Cerveja {
 		ResultSet rs = stmt.executeQuery();
 		
 		while(rs.next()) {
-			CervejaDto cerva = new CervejaDto(rs.getLong(2), rs.getString(3), rs.getString(1), rs.getInt(4), rs.getDouble(5));
+			CervejaDto cerva = new CervejaDto(rs.getLong(2), rs.getString(3), rs.getString(1), rs.getString(4), rs.getInt(5), rs.getDouble(6));
 			cervejas.add(cerva);
 		}
 		rs.close();
@@ -108,6 +108,31 @@ public class Cerveja {
 		con.close();
 		
 		return new ListaPaginada<CervejaDto>(cervejas, total);		
+	}
+	
+	public static CervejaDto obterCerveja (Long idCerveja) throws SQLException {
+		//TODO acrescentar campo com a média das avaliações
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select f.nome_fantasia, c.id_cerveja, c.nome_cerveja, c.ibu, c.abv, c.descricao_cerveja from Cerveja c "
+				+ "inner join Fabricante f on f.id_fabricante = c.Fabricante_id_fabricante "
+				+ "where c.id_cerveja = ?"; 
+
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setLong(1, idCerveja);
+		ResultSet rs = stmt.executeQuery();
+		
+		CervejaDto cerva = null;
+		
+		if(rs.next()) {
+			cerva = new CervejaDto(rs.getLong(2), rs.getString(3), rs.getString(1), rs.getString(6), rs.getInt(4), rs.getDouble(5));
+		} else {
+			
+		}
+		rs.close();
+		stmt.close();
+		con.close();
+		
+		return cerva;
 	}
 	
 	//Getters e setters

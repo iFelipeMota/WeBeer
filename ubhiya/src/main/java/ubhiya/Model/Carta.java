@@ -35,7 +35,7 @@ public class Carta {
 			stmt.setLong(1, idComercio);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				CervejaDto cerva = new CervejaDto(rs.getLong(1), rs.getString(2), rs.getString(3), null, null);
+				CervejaDto cerva = new CervejaDto(rs.getLong(1), rs.getString(2), rs.getString(3), null, null, null);
 				cervejas.add(cerva);
 			}
 			rs.close();
