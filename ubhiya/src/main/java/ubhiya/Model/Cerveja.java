@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ubhiya.ConexaoMySQL;
+import ubhiya.Dto.CervejaDto;
+import ubhiya.Dto.ListaPaginada;
 
 public class Cerveja {
 
@@ -77,10 +79,35 @@ public class Cerveja {
 
 	}
 
-	public List<Cerveja> buscarCervejas() throws SQLException {
-		//Connection con = ConexaoMySQL.conectar();
-		//TODO Implementar busca de cervejas
-		return null;		
+	public static ListaPaginada<CervejaDto> buscarCervejas(int pagina) throws SQLException {
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select f.nome_fantasia, c.id_cerveja, c.nome_cerveja, c.ibu, c.abv from Cerveja c "
+				+ "inner join Fabricante f on f.id_fabricante = c.Fabricante_id_fabricante "
+				+ "limit " + (pagina-1)*10 + ",10"; 
+
+		List<CervejaDto> cervejas = new ArrayList<CervejaDto>(); 
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			CervejaDto cerva = new CervejaDto(rs.getLong(2), rs.getString(3), rs.getString(1), rs.getInt(4), rs.getDouble(5));
+			cervejas.add(cerva);
+		}
+		rs.close();
+		stmt.close();
+		
+		Long total = 0l;
+		sql = "select count(*) from cerveja";
+		stmt = con.prepareStatement(sql);
+		rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			total = rs.getLong(1);
+		}
+		con.close();
+		
+		return new ListaPaginada<CervejaDto>(cervejas, total);		
 	}
 	
 	//Getters e setters

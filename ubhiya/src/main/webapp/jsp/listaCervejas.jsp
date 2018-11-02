@@ -1,3 +1,5 @@
+<%@page import="ubhiya.Model.Cerveja"%>
+<%@page import="ubhiya.Dto.ListaPaginada"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="ubhiya.Dto.CervejaDto"%>
@@ -8,18 +10,19 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%
-	String mensagem = null;
-	boolean erro = false;
+	int pagina = 1;
+	Long totalPaginas = 0l;
+	ListaPaginada<CervejaDto> cervejas = null;
 	
-	List<CervejaDto> cartaDeCervejas = new ArrayList<CervejaDto>();
-	
-	Comercio comercio = (Comercio)request.getSession().getAttribute("comercio");
-	
-	try{
-		cartaDeCervejas = Carta.obterCartaPorComercio(comercio.getIdComercio());
-	} catch (SQLException e){
-		mensagem = "Erro ao buscar carta de cervejas: " + e.getMessage();
+	try {
+		cervejas = Cerveja.buscarCervejas(pagina);
+		totalPaginas = cervejas.getTotalRegistros() / 10 + (cervejas.getTotalRegistros() % 10 == 0 ? 0 : 1);
+
+	}catch (SQLException e){
+		
 	}
+	
+	
 %>
 <html>
 <head>
@@ -46,41 +49,37 @@
 </head>
 <body>
 	<div class="jumbotron">
-  		<h1>Bem vindo, <%=comercio.getNomeFantasia() %></h1>
-  		<p>Divulgue sua carta de cervejas</p>
-  		<p>
-  			<a class="btn btn-primary btn-lg" href="listaCervejas.jsp" role="button">Pesquisar cervejas</a>
-  		</p>
+  		<h1>Lista de cervejas</h1>
 	</div>
-	<%if(mensagem != null){%>
-		<h3 class="text-danger"><%=mensagem%></h3>
-	<%} else if(cartaDeCervejas.size() == 0){ %>
-		<h3 class="text-warning">Nenhuma cerveja na sua carta</h3>
-	<%} else {%>
 		<table class="table table-striped">
 	  		<thead>
 	    		<tr>
 	    			<th scope="col">#</th>
 	      			<th scope="col">Cervejaria</th>
 	      			<th scope="col">Cerveja</th>
-	      			<th scope="col"></th>
+	      			<th scope="col">IBU</th>
+	      			<th scope="col">ABV</th>
 			    </tr>
 	  		</thead>
 	  		<tbody>
-	  		<%for(int i=0; i<cartaDeCervejas.size(); i++){ %>
+	  		<%for(int i=0; i<cervejas.getLista().size(); i++){ %>
 			    <tr>
 			      <th scope="row"><%=i+1%></th>
-			      <td><%=cartaDeCervejas.get(i).getFabricante() %></td>
-			      <td><%=cartaDeCervejas.get(i).getNomeCerveja() %></td>
-			      <td>
-			      	<form>
-	      				<input name="delete" class="btn btn-danger" type="submit" value="X">
-	      				<input name="id" type="hidden" value="<%=cartaDeCervejas.get(i).getIdCerveja() %>">
-	     			</form>
-			      </td>
+			      <td><%=cervejas.getLista().get(i).getFabricante() %></td>
+			      <td><%=cervejas.getLista().get(i).getNomeCerveja() %></td>
+			      <td><%=cervejas.getLista().get(i).getIbu() %></td>
+			      <td><%=cervejas.getLista().get(i).getAbv() %></td>
+			      
 			    </tr>
-		    <%}}%>
+		    <%}%>
 		  </tbody>
 		</table>
+		<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  <%for(Long i=1l; i<=totalPaginas; i++){ %>
+    <li class="page-item"><input type="submit" value="<%=i%>"><input type="hidden" value="pagina"></li>
+  <%}%>
+  </ul>
+</nav>
 </body>
 </html>
