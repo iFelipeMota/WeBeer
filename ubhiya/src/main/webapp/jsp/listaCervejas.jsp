@@ -55,9 +55,10 @@
 <body>
 	<div class="jumbotron">
   		<h1>Lista de cervejas</h1>
+  		<p>Para maiores detalhes sobre alguma cerveja, clique sobre ela na tabela.</p>
 	</div>
-		<form name="form" action="detalhesCerveja.jsp" method="post">
-		<table class="table table-striped">
+		
+		<table class="table table-hover">
 	  		<thead>
 	    		<tr>
 	    			<th scope="col">#</th>
@@ -70,8 +71,13 @@
 	  		<tbody>
 	  		
 	  		<%for(int i=0; i<cervejas.getLista().size(); i++){ %>
-			    <tr onclick="form.submit()">
-			      <th scope="row"><%=i+1%><input type="hidden" name="idCerveja" value="<%=cervejas.getLista().get(i).getIdCerveja() %>"></th>
+			    <tr onclick='<%="f"+i+".submit()"%>'>
+			      <th scope="row">
+			      	<%=i+1%>
+			      	<form name='<%="f"+i%>' action="detalhesCerveja.jsp" method="post">
+			      		<input type="hidden" name="idCerveja" value="<%=cervejas.getLista().get(i).getIdCerveja() %>">
+			      	</form>
+			      </th>
 			      <td><%=cervejas.getLista().get(i).getFabricante() %></td>
 			      <td><%=cervejas.getLista().get(i).getNomeCerveja() %></td>
 			      <td><%=cervejas.getLista().get(i).getIbu() %></td>
@@ -82,7 +88,7 @@
 		    
 		  </tbody>
 		</table>
-		</form>
+
 		<nav aria-label="Page navigation example">
   <form method="post">
   <ul class="pagination">

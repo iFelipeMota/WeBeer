@@ -15,6 +15,14 @@
 	
 	Comercio comercio = (Comercio)request.getSession().getAttribute("comercio");
 	
+	if (request.getParameter("delete") != null){
+		try{
+			Carta.removerCarta(comercio.getIdComercio(), Long.valueOf(request.getParameter("id")));
+		}catch (Exception e){
+			mensagem = "Erro ao remover cerveja da carta: " + e.getMessage();
+		}
+	}
+	
 	try{
 		cartaDeCervejas = Carta.obterCartaPorComercio(comercio.getIdComercio());
 	} catch (SQLException e){

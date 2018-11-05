@@ -44,6 +44,55 @@ public class Carta {
 		return cervejas;
 	}
 	
+	public static boolean cervejaEstaNaCarta(Long idComercio, Long idCerveja) throws SQLException {
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select * from Carta where Estabelecimento_id_estabelecimento = ? and Cerveja_id_cerveja = ?";
+		boolean ret = false;
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setLong(1, idComercio);
+		stmt.setLong(2, idCerveja);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			ret = true;
+		}
+		rs.close();
+		stmt.close();
+		con.close();
+		
+		return ret;
+	}
+	
+	public static void adicionarCarta(Long idComercio, Long idCerveja) throws SQLException{
+		Connection con = ConexaoMySQL.conectar();
+
+		String sql = "insert into Carta (Estabelecimento_id_estabelecimento, Cerveja_id_cerveja) values (?,?)";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setLong(1, idComercio);
+		stmt.setLong(2, idCerveja);
+		stmt.execute();
+		
+		stmt.close();
+		con.close();
+	}
+	
+	public static void removerCarta(Long idComercio, Long idCerveja) throws SQLException{
+		Connection con = ConexaoMySQL.conectar();
+
+		String sql = "delete from Carta where Estabelecimento_id_estabelecimento = ? and Cerveja_id_cerveja = ?";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setLong(1, idComercio);
+		stmt.setLong(2, idCerveja);
+		stmt.execute();
+		
+		stmt.close();
+		con.close();
+	}
+	
 	public Long getIdCerveja() {
 		return idCerveja;
 	}
