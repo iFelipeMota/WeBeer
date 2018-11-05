@@ -1,6 +1,14 @@
 <%@page import="ubhiya.ConexaoMySQL"%>
+<%@page import="ubhiya.Controller.ControleDeSessao"%>
 <%
 	String path = request.getContextPath();
+	String login = "";
+	String senha = "";
+
+	if (session.getAttribute("userName") != null) {
+		login = (String) session.getAttribute("userName");
+		senha = (String) session.getAttribute("senha");
+	}
 %>
 <html>
 <head>
@@ -22,43 +30,68 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="<%=path%>/jsp/estilos.css">
 </head>
 <body>
 	<header>
 		<nav class="navbar navbar-default">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#collapse-navbar"
-						aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
 
-					<a class="navbar-brand" href="<%=path%>/index.jsp">WeBeer</a>
-				</div>
+				<a class="navbar-brand" href="#">WeBeer</a>
 
-				<div class="collapse navbar-collapse" id="collapse-navbar">
-					<ul class="nav navbar-nav">
-						<li><a href="<%=path%>/jsp/cadUser.jsp">Administrador</a></li>
-						<li><a href="<%=path%>/jsp/cadCliente.jsp">Consumidor</a></li>
-						<li><a href="<%=path%>/jsp/cadComercio.jsp">Comércio</a></li>
-						<li><a href="<%=path%>/jsp/cadFabricante.jsp">Fabricante</a></li>
-					</ul>
-				</div>
 			</div>
 		</nav>
 
 	</header>
-	<div class="container">
-		<h2>Olá Mundo Cervejeiro!</h2>
-		<p>Use os links ou a barra de navegação para acessar as telas de cadastros</p>
 
-		<a href="<%=path%>/jsp/cadUser.jsp">Usuários</a> || <a
-			href="<%=path%>/jsp/cadCliente.jsp">Consumidor</a> || <a
-			href="<%=path%>/jsp/cadComercio.jsp">Comércio</a> || <a
-			href="<%=path%>/jsp/cadFabricante.jsp">Fabricante</a>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="container">
+				<p>O WeBeer é para você que gosta de saborear e conhecer...</p>
+				<p>Apresentação do Sistema</p>
+				<p>Insira uma Encheção de Linguiça aqui</p>
+				<p>Insira uma Encheção de Linguiça aqui</p>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="login-banner container">
+				<form action="ControleDeSessao">
+					<div class="form-group">
+						<label for="log-user">Login:</label> <input id="log-user"
+							type="text" name="userName" placeholder="Login"
+							class="form-control" value="<%=login%>">
+					</div>
+
+					<div class="form-group">
+						<label for="log-senha">Senha:</label> <input id="log-senha"
+							type="password" name="senha" placeholder="Sua Senha"
+							class="form-control" value="<%=senha%>">
+					</div>
+					
+					<%if(session.getAttribute("status")!=null){ %>
+					<div class="alert alert-warning" role="alert">
+						<%=session.getAttribute("status") %>
+					</div>
+					<%} %>
+					<button type="submit" name=login
+						class="btn btn-primary btn-lg login-button" value="entrar">Logar</button>
+				</form>
+			</div>
+		</div>
 	</div>
+	<footer>
+		<address>
+			<strong>WeBeer - Cervejas Artesanais</strong><br> Rua Lúpulo,
+			75, Vila Cevada<br> São Paulo, SP<br> Tel: (13) 3479-9087
+		</address>
+		<address></address>
+	</footer>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
