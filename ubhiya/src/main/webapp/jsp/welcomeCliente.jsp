@@ -35,7 +35,7 @@
   		<p>Encontre novas cervejas, avalie as que você já provou, e saiba onde sua cerveja favorita pode ser encontrada</p>
   		<p>
   			<a class="btn btn-primary btn-lg" href="#" role="button">Procurar estabelecimentos</a>
-  			<a class="btn btn-primary btn-lg" href="#" role="button">Listar cervejas</a>
+  			<a class="btn btn-primary btn-lg" href="listaCervejas.jsp" role="button">Listar cervejas</a>
   		</p>
 	</div>
 </body>

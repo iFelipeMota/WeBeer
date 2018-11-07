@@ -174,6 +174,9 @@
 					}
 				break;
 			}
+		} else {
+			error = true;
+			mensagem = "Usuário e/ou senha inválido";
 		}
 	}
 
