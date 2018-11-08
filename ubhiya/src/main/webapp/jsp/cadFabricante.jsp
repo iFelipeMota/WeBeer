@@ -10,36 +10,36 @@
 	String path = request.getContextPath();
 
 	String status;
-	Fabricante c = new Fabricante();
-	c.setLogin("");
-	c.setSenha("");
-	c.setTipoUser(2);
-	c.setRazaoSocial("");
-	c.setCnpj("");
-	c.setIe("");
-	c.setNomeFantasia("");
-	List<Fabricante> comercios = new ArrayList<Fabricante>(c.buscarComercios());
+	Fabricante f = new Fabricante();
+	f.setLogin("");
+	f.setSenha("");
+	f.setTipoUser(4);
+	f.setRazaoSocial("");
+	f.setCnpj("");
+	f.setIe("");
+	f.setNomeFantasia("");
+	List<Fabricante> fabricantes = new ArrayList<Fabricante>(f.buscarFabricantes());
 
 	if (request.getParameter("add") != null) {
 		/*Usuario u = new Usuario(request.getParameter("login"), request.getParameter("senha"), 1);
 		u.cadastrar();
 		response.sendRedirect(request.getRequestURI());
 		status = u.getStatus();*/
-		c.setLogin(request.getParameter("login"));
-		c.setSenha(request.getParameter("senha"));
-		c.setRazaoSocial(request.getParameter("razaoS"));
-		c.setCnpj(request.getParameter("cnpj"));
-		c.setIe(request.getParameter("ie"));
-		c.setNomeFantasia(request.getParameter("nomeF"));
-		c.cadastrarComercio();
+		f.setLogin(request.getParameter("login"));
+		f.setSenha(request.getParameter("senha"));
+		f.setRazaoSocial(request.getParameter("razaoS"));
+		f.setCnpj(request.getParameter("cnpj"));
+		f.setIe(request.getParameter("ie"));
+		f.setNomeFantasia(request.getParameter("nomeF"));
+		f.cadastrarFabricante();
 		response.sendRedirect(request.getRequestURI());
 	}
 	if (request.getParameter("del") != null) {
-		c.deletar(Long.valueOf(request.getParameter("id")));
+		f.deletar(Long.valueOf(request.getParameter("id")));
 		response.sendRedirect(request.getRequestURI());
 	}
 	if (request.getParameter("alt") != null) {
-		c = comercios.get(Integer.parseInt(request.getParameter("i")) - 1);
+		f = fabricantes.get(Integer.parseInt(request.getParameter("i")) - 1);
 		/*c.setLogin(comercios.get(Integer.parseInt(request.getParameter("i")) - 1).getLogin());
 		c.setSenha(comercios.get(Integer.parseInt(request.getParameter("i")) - 1).getSenha());
 		c.setRazaoSocial(comercios.get(Integer.parseInt(request.getParameter("i")) - 1).getRazaoSocial());
@@ -48,14 +48,14 @@
 		c.setNomeFantasia(comercios.get(Integer.parseInt(request.getParameter("i")) - 1).getNomeFantasia());*/
 	}
 	if (request.getParameter("sal") != null) {
-		c.setLogin(request.getParameter("login"));
-		c.setSenha(request.getParameter("senha"));
-		c.setRazaoSocial(request.getParameter("razaoS"));
-		c.setCnpj(request.getParameter("cnpj"));
-		c.setIe(request.getParameter("ie"));
-		c.setNomeFantasia(request.getParameter("nomeF"));
-		c.setId(Long.valueOf(request.getParameter("id")));
-		c.alterarComercio();
+		f.setLogin(request.getParameter("login"));
+		f.setSenha(request.getParameter("senha"));
+		f.setRazaoSocial(request.getParameter("razaoS"));
+		f.setCnpj(request.getParameter("cnpj"));
+		f.setIe(request.getParameter("ie"));
+		f.setNomeFantasia(request.getParameter("nomeF"));
+		f.setId(Long.valueOf(request.getParameter("id")));
+		f.alterarFabricante();
 		response.sendRedirect(request.getRequestURI());
 	}
 %>
@@ -119,45 +119,45 @@
 					<div class="form-group">
 						<label for="log-user">Login:</label> <input id="log-user"
 							type="text" name="login" placeholder="Login" class="form-control"
-							value="<%=c.getLogin()%>">
+							value="<%=f.getLogin()%>">
 					</div>
 
 					<div class="form-group">
 						<label for="log-senha">Senha:</label> <input id="log-senha"
 							type="password" name="senha" placeholder="Sua Senha"
-							class="form-control" value="<%=c.getSenha()%>">
+							class="form-control" value="<%=f.getSenha()%>">
 					</div>
 
 					<div class="form-group">
 						<label for="log-nomef">Nome Fantasia:</label> <input
 							id="log-nomef" type="text" name="nomeF"
 							placeholder="Nome Fantasia" class="form-control"
-							value="<%=c.getNomeFantasia()%>">
+							value="<%=f.getNomeFantasia()%>">
 					</div>
 
 					<div class="form-group">
 						<label for="log-rs">Razão Social:</label> <input id="log-rs"
 							type="text" name="razaoS" placeholder="Razão Social"
-							class="form-control" value="<%=c.getRazaoSocial()%>">
+							class="form-control" value="<%=f.getRazaoSocial()%>">
 					</div>
 
 					<div class="form-group">
 						<label for="log-cnpj">CNPJ:</label> <input id="log-cnpj"
 							type="text" name="cnpj" placeholder="CNPJ" class="form-control"
-							value="<%=c.getCnpj()%>">
+							value="<%=f.getCnpj()%>">
 					</div>
 
 					<div class="form-group">
 						<label for="log-ie">IE:</label> <input id="log-ie" type="text"
 							name="ie" placeholder="IE" class="form-control"
-							value="<%=c.getIe()%>">
+							value="<%=f.getIe()%>">
 					</div>
 					<%
 						if (request.getParameter("alt") != null) {
 					%>
 					<button type="submit" name="sal"
 						class="btn btn-primary btn-lg login-button">Alterar</button>
-					<input type="hidden" name="id" value="<%=c.getId()%>">
+					<input type="hidden" name="id" value="<%=f.getId()%>">
 					<%
 						} else {
 					%>
@@ -184,21 +184,21 @@
 					</tr>
 					<%
 						int i = 0;
-						for (Fabricante comercio : comercios) {
+						for (Fabricante fabricante : fabricantes) {
 							i++;
 					%>
 					<tr>
 						<td><%=i%></td>
-						<td><%=comercio.getId()%></td>
-						<td><%=comercio.getLogin()%></td>
-						<td><%=comercio.getSenha()%></td>
-						<td><%=comercio.getRazaoSocial()%></td>
-						<td><%=comercio.getNomeFantasia()%></td>
-						<td><%=comercio.getCnpj()%></td>
-						<td><%=comercio.getIe()%></td>
+						<td><%=fabricante.getId()%></td>
+						<td><%=fabricante.getLogin()%></td>
+						<td><%=fabricante.getSenha()%></td>
+						<td><%=fabricante.getRazaoSocial()%></td>
+						<td><%=fabricante.getNomeFantasia()%></td>
+						<td><%=fabricante.getCnpj()%></td>
+						<td><%=fabricante.getIe()%></td>
 						<td>
 							<form>
-								<input type="hidden" name="id" value="<%=comercio.getId()%>">
+								<input type="hidden" name="id" value="<%=fabricante.getId()%>">
 								<input type="hidden" name="i" value="<%=i%>"> <input
 									type="submit" name="alt" value="Alterar"> <input
 									type="submit" name="del" value="Excluir">

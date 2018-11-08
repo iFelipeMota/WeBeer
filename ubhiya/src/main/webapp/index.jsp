@@ -57,7 +57,8 @@
 
 		<div class="col-md-4">
 			<div class="login-banner container">
-				<form action="ControleDeSessao">
+				<!--form action="ControleDeSessao"-->
+				<form action="jsp/resposta.jsp" method="post">
 					<div class="form-group">
 						<label for="log-user">Login:</label> <input id="log-user"
 							type="text" name="userName" placeholder="Login"
@@ -78,6 +79,14 @@
 					<button type="submit" name=login
 						class="btn btn-primary btn-lg login-button" value="entrar">Logar</button>
 				</form>
+				
+				<a href="jsp/cadastroCliente.jsp"
+						class="btn btn-primary btn-lg">Cadastro Cliente</a>
+				<a href="jsp/cadastroComercio.jsp"
+						class="btn btn-primary btn-lg">Cadastro Comércio</a>
+				<a href="jsp/cadastroFabricante.jsp"
+						class="btn btn-primary btn-lg">Cadastro Fabricante</a>		
+				
 			</div>
 		</div>
 	</div>
