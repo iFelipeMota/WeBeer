@@ -101,8 +101,8 @@
 	<div class="container">
 		<%if (cerveja != null){%>
 			<h1><%=cerveja.getNomeCerveja() %></h1>
-			<h3><%=cerveja.getFabricante() %></h3>
-			<hr/>
+			<h4 class="text-secondary"><%=cerveja.getFabricante() %></h4>
+			
 			<p><%=cerveja.getDescricaoCerveja() %></p>
 			<p><b>IBU:&nbsp;</b><%=cerveja.getIbu() %></p>
 			<p><b>ABV:&nbsp;</b><%=cerveja.getAbv() %> %</p>

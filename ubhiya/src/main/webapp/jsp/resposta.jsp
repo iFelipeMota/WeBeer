@@ -120,6 +120,7 @@
 		try{
 			cerva.cadastrarCerveja();
 			mensagem = "Cerveja cadastrada com sucesso!";
+			destino = "welcomeFabricante.jsp";
 		} catch (SQLException e){
 			error = true;
 			mensagem = "Erro ao cadastrar cerveja: " + e.getMessage();
