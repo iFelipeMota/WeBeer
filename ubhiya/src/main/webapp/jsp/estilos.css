@@ -1,0 +1,32 @@
+body{
+	background-color: #ffa500;
+	height: 100%;
+}
+
+footer {
+    background-color: #333;
+    color:#FFF;
+    padding: 1em;
+	margin-top: 10px;
+}
+
+footer address:last-child {
+ margin-bottom: 0;
+}
+
+.media-pq{
+	background-size: contain;
+	width: 200px;
+	height: 200px;
+}
+
+.login-button{
+}
+
+.login-banner{
+	color: #FFF;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	width: 80%;
+	border-radius: 8px;
+}
