@@ -44,20 +44,20 @@
 		</nav>
 
 	</header>
-
+<div class="container">
 	<div class="row">
-		<div class="col-md-8">
+		<!--div class="col-md-8">
 			<div class="container">
 				<p>O WeBeer é para você que gosta de saborear e conhecer...</p>
 				<p>Apresentação do Sistema</p>
 				<p>Insira uma Encheção de Linguiça aqui</p>
 				<p>Insira uma Encheção de Linguiça aqui</p>
 			</div>
-		</div>
-
-		<div class="col-md-4">
-			<div class="login-banner container">
-				<form action="ControleDeSessao">
+		</div-->
+		<div class="col-sm-6 col-md-4">
+			
+				<!--form action="ControleDeSessao"-->
+				<form action="jsp/resposta.jsp" method="post">
 					<div class="form-group">
 						<label for="log-user">Login:</label> <input id="log-user"
 							type="text" name="userName" placeholder="Login"
@@ -78,9 +78,46 @@
 					<button type="submit" name=login
 						class="btn btn-primary btn-lg login-button" value="entrar">Logar</button>
 				</form>
-			</div>
+				
+			
 		</div>
+
+
 	</div>
+		<div class="row">
+    		 <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <!--img src="..." alt="..."-->
+      <div class="caption">
+        <h3>Degustador</h3>
+        <p>Cadastre-se e encontre cervejas que possam te agradar, avalie as que você já conhece e saiba onde encontrar suas cervejas favoritas!</p>
+        <p><a href="jsp/cadastroCliente.jsp" class="btn btn-primary" role="button">Cadastro Degustador</a></p>
+      </div>
+    </div>
+  </div>
+		     <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Comércio</h3>
+        <p>Cadastre-se, descubra as cervejas que fazem sucesso, divulgue sua carta de cervejas, e prepare-se para receber mais clientes!</p>
+        <p><a href="jsp/cadastroComercio.jsp" class="btn btn-primary" role="button">Cadastro Comércio</a> </p>
+      </div>
+    </div>
+  </div>
+		     <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Fabricante</h3>
+        <p>Divulgue seus produtos, saiba quais cervejas suas agradam o público e descubra possíveis locais de distribuição!</p>
+        <p><a href="jsp/cadastroFabricante.jsp" class="btn btn-primary" role="button">Cadastro Cervejaria</a> </p>
+      </div>
+    </div>
+
+  		</div>
+	</div>
+			</div>
+	
+	
 	<footer>
 		<address>
 			<strong>WeBeer - Cervejas Artesanais</strong><br> Rua Lúpulo,

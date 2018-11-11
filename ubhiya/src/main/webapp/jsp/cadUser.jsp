@@ -66,7 +66,7 @@
 
 </head>
 <body>
-	<%@include file="../jspf/header.jspf"%>
+	<!-- %@include file="../jspf/header.jspf"%-->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 container">

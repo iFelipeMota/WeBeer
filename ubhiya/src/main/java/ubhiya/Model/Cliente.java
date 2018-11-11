@@ -114,6 +114,25 @@ public class Cliente extends Usuario{
 		}
 		return clientes;		
 	}
+	
+	public static Cliente obterCliente(Long idUsuario) throws SQLException{
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select a.id_usuario, a.login, a.senha, b.id_cliente, b.nome, b.endereco from Usuario as a, Cliente as b where b.Usuario_id_usuario = a.id_usuario and b.Usuario_id_usuario = ?";
+		Cliente cliente = null;
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setLong(1, idUsuario);
+		ResultSet rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			cliente = new Cliente(new Usuario(idUsuario, rs.getString(2), null, 2), rs.getLong(4), rs.getString(5), rs.getString(6));
+		}
+		rs.close();
+		stmt.close();
+		con.close();
+		
+		return cliente;
+	}
 
 	public Long getIdCliente() {
 		return idCliente;

@@ -172,6 +172,21 @@ public class Usuario {
 		return admns;		
 	}
 	
+	public static boolean existeLogin(String login) throws SQLException {
+		Connection con = ConexaoMySQL.conectar();
+		String sql = "select * from Usuario where login = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1, login);
+		ResultSet rs = stmt.executeQuery();
+		boolean ret = false;
+		if (rs.next()) {
+			ret = true;
+		}
+		rs.close();
+		stmt.close();
+		return ret;
+	}
+	
 
 	public Long getId() {
 		return id;

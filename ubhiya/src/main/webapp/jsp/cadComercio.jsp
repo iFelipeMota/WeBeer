@@ -13,7 +13,7 @@
 	Comercio c = new Comercio();
 	c.setLogin("");
 	c.setSenha("");
-	c.setTipoUser(2);
+	c.setTipoUser(3);
 	c.setRazaoSocial("");
 	c.setCnpj("");
 	c.setIe("");
