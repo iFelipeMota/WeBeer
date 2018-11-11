@@ -123,7 +123,7 @@ public class Comercio extends Usuario{
 		return comercios;		
 	}
 	
-	//Método para verificar se já existe comércio cadastrado com o cnpj informado
+	//Mï¿½todo para verificar se jï¿½ existe comï¿½rcio cadastrado com o cnpj informado
 	public static boolean existeCnpj(String cnpj) throws SQLException {
 		Connection con = ConexaoMySQL.conectar();
 		String sql = "select * from Estabelecimento where cnpj = ?";

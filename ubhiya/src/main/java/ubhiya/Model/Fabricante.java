@@ -142,7 +142,7 @@ public class Fabricante  extends Usuario{
 		return fabricante;
 	}
 
-	//Método para verificar se já existe fabricante cadastrado com o cnpj informado
+	//Mï¿½todo para verificar se jï¿½ existe fabricante cadastrado com o cnpj informado
 	public static boolean existeCnpj(String cnpj) throws SQLException {
 		Connection con = ConexaoMySQL.conectar();
 		String sql = "select * from Fabricante where cnpj = ?";

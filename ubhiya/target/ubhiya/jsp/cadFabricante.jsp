@@ -111,7 +111,7 @@
 			</div>
 		</nav>
 	</header>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 container">
@@ -127,10 +127,11 @@
 							type="password" name="senha" placeholder="Sua Senha"
 							class="form-control" value="<%=c.getSenha()%>">
 					</div>
-					
+
 					<div class="form-group">
-						<label for="log-nomef">Nome Fantasia:</label> <input id="log-nomef"
-							type="text" name="nomeF" placeholder="Nome Fantasia" class="form-control"
+						<label for="log-nomef">Nome Fantasia:</label> <input
+							id="log-nomef" type="text" name="nomeF"
+							placeholder="Nome Fantasia" class="form-control"
 							value="<%=c.getNomeFantasia()%>">
 					</div>
 
@@ -139,17 +140,17 @@
 							type="text" name="razaoS" placeholder="Razão Social"
 							class="form-control" value="<%=c.getRazaoSocial()%>">
 					</div>
-					
+
 					<div class="form-group">
 						<label for="log-cnpj">CNPJ:</label> <input id="log-cnpj"
-							type="text" name="cnpj" placeholder="CNPJ"
-							class="form-control" value="<%=c.getCnpj()%>">
+							type="text" name="cnpj" placeholder="CNPJ" class="form-control"
+							value="<%=c.getCnpj()%>">
 					</div>
-					
+
 					<div class="form-group">
-						<label for="log-ie">IE:</label> <input id="log-ie"
-							type="text" name="ie" placeholder="IE"
-							class="form-control" value="<%=c.getIe()%>">
+						<label for="log-ie">IE:</label> <input id="log-ie" type="text"
+							name="ie" placeholder="IE" class="form-control"
+							value="<%=c.getIe()%>">
 					</div>
 					<%
 						if (request.getParameter("alt") != null) {
@@ -211,5 +212,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="jquery.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

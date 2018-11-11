@@ -17,6 +17,13 @@
 		<servlet-name>ControleDeTransacao</servlet-name>
 		<servlet-class>ubhiya.Controller.ControleDeTransacao</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ImageSaver</display-name>
+		<servlet-name>ImageSaver</servlet-name>
+		<servlet-class>ubhiya.Controller.ImageSaver</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ControleDeSessao</servlet-name>
 		<url-pattern>/ControleDeSessao</url-pattern>
@@ -24,5 +31,9 @@
 	<servlet-mapping>
 		<servlet-name>ControleDeTransacao</servlet-name>
 		<url-pattern>/ControleDeTransacao</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ImageSaver</servlet-name>
+		<url-pattern>/ImageSaver</url-pattern>
 	</servlet-mapping>
 </web-app>
